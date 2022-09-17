@@ -77,5 +77,20 @@ print(model.f_test([0, 1, -1, 0]))
 
 ## Seaborn for Statistical Data Visualization
 import seaborn 
+from tableone import TableOne, load_dataset
+data = load_dataset("pn2012")
+seaborn.pairplot(data, vars=["Age", "LOS"], kind='reg')
 
+seaborn.pairplot(data, vars=["Age", "LOS"], kind='reg', hue='LOS')
+
+## Matplotlib Settings
+from matplotlib import pyplot as plt
+plt.rodefaults()
+
+## Implot for Regression
+seaborn.lmplot(y='Age', x='LOS', data=data)
+
+## Testing for Interaction
+result = data.ols(formula='age ~ los + los', data=data).fit()
+print(result.summary())
 
